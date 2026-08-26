@@ -25,7 +25,7 @@ export default function App() {
       const all = [];
       for (const road of ROADS) {
         try {
-          const res = await fetch(`http://127.0.0.1:8000/api/roadworks/${road}`);
+          const res = await fetch(`https://bauwatcher-production.up.railway.app/api/roadworks/${road}`);
           const data = await res.json();
           (data.roadworks || []).forEach(item => {
             all.push({
@@ -51,7 +51,7 @@ export default function App() {
     setSummary('');
     setLoadingSummary(true);
     try {
-      const res = await fetch('http://127.0.0.1:8000/api/summary', {
+      const res = await fetch('https://bauwatcher-production.up.railway.app/api/summary', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ title: rw.title, road: rw.road, start: rw.start, blocked: rw.blocked })
