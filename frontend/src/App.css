@@ -36,3 +36,4 @@
     transform: rotate(360deg);
   }
 }
+@media (max-width: 768px) { div[style*="width: 340px"] { width: 100vw !important; position: absolute; z-index: 1000; bottom: 0; height: 40vh; } }

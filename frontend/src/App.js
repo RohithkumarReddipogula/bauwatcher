@@ -22,25 +22,20 @@ export default function App() {
 
   useEffect(() => {
     const fetchAll = async () => {
-      const all = [];
-      for (const road of ROADS) {
-        try {
-          const res = await fetch(`https://bauwatcher-production.up.railway.app/api/roadworks/${road}`);
-          const data = await res.json();
-          (data.roadworks || []).forEach(item => {
-            all.push({
-              id: item.identifier,
-              title: item.title,
-              road: item.road,
-              lat: item.coordinate.lat,
-              lon: item.coordinate.long,
-              start: item.startTimestamp,
-              blocked: item.isBlocked === 'true',
-            });
-          });
-        } catch (e) {}
-      }
-      setRoadworks(all);
+      try {
+        const res = await fetch('https://bauwatcher-production.up.railway.app/api/all');
+        const data = await res.json();
+        const all = (data.roadworks || []).map(item => ({
+          id: item.identifier,
+          title: item.title,
+          road: item.road,
+          lat: item.coordinate.lat,
+          lon: item.coordinate.long,
+          start: item.startTimestamp,
+          blocked: item.isBlocked === 'true',
+        }));
+        setRoadworks(all);
+      } catch (e) {}
       setLoading(false);
     };
     fetchAll();
@@ -75,6 +70,8 @@ export default function App() {
   });
 
   const blocked = roadworks.filter(r => r.blocked).length;
+  const isMobile = window.innerWidth < 768;
+  const [showSidebar, setShowSidebar] = useState(!isMobile);
   const disruptions = roadworks.filter(r => !r.blocked).length;
 
   return (
