@@ -1,3 +1,5 @@
+[![Live Demo](https://img.shields.io/badge/Live_Demo-BauWatcher-brightgreen?style=for-the-badge)](https://frontend-jet-kappa-25.vercel.app)
+
 # BauWächter
 
 A live map of every roadwork and construction disruption across Germany. Click any marker and get an AI-generated plain English summary of what is happening, how it affects drivers, and when it ends.
